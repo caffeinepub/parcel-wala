@@ -1,0 +1,180 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-14T19:37:43.227Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 10,
+    "implemented": 9,
+    "items": [
+      {
+        "id": "REQ-35",
+        "summary": "Update the home hero phone photograph to include the on-screen branding text \"Pacel Wala\" and render the updated asset wherever the current phone photograph is used.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/home-hero-photo-pacel-wala.dim_1200x600.jpg",
+          "frontend/src/pages/HomePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/generated/home-hero-photo-pacel-wala.dim_1200x600.jpg",
+          "frontend/src/pages/HomePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-36",
+        "summary": "Change in-app page transitions to use a smooth side-to-side (horizontal) slide animation for tab/screen changes, while respecting the user's prefers-reduced-motion setting.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/motion/AnimatedTabContent.tsx",
+          "frontend/src/layouts/MobileAppLayout.tsx",
+          "frontend/src/index.css"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/motion/AnimatedTabContent.tsx",
+          "frontend/src/layouts/MobileAppLayout.tsx"
+        ]
+      },
+      {
+        "id": "REQ-37",
+        "summary": "Replace any remaining '$' currency displays with the Indian Rupee symbol (₹) across the entire UI, including icons where appropriate.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/MobileTabs.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/cards/ParcelCard.tsx",
+          "frontend/src/components/cards/TripCard.tsx",
+          "frontend/src/pages/EarningsPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/MobileTabs.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/cards/ParcelCard.tsx",
+          "frontend/src/components/cards/TripCard.tsx",
+          "frontend/src/pages/EarningsPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-38",
+        "summary": "Remove the \"How are you travelling\" (travel mode selection) field from the Send Parcel tab flow, and update validation and payload creation accordingly.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/SendParcelPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/SendParcelPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-39",
+        "summary": "Add a Profile photo upload option on the Profile tab that allows the user to select an image locally and preview it as their avatar (UI-only; no external hosting).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useProfilePhoto.ts",
+          "frontend/src/pages/ProfilePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useProfilePhoto.ts",
+          "frontend/src/pages/ProfilePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-40",
+        "summary": "Add a Sign Up option for new users that collects details including name, phone number, and address as per government ID proof (and any additional required details), and persists these details to the canister user profile.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/AccessDeniedPage.tsx",
+          "frontend/src/components/SignUpModal.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/AccessDeniedPage.tsx",
+          "frontend/src/components/SignUpModal.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-41",
+        "summary": "In the Sign Up flow, style the Name field so that its text appears larger than other fields and the input has no background fill (transparent), while keeping readability consistent with the current theme.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/SignUpModal.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/SignUpModal.tsx"
+        ]
+      },
+      {
+        "id": "REQ-42",
+        "summary": "Ensure the Offer Trip tab is present in the bottom tab navigation and navigates to the existing Offer Trip page.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/MobileTabs.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/layouts/MobileAppLayout.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/MobileTabs.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/layouts/MobileAppLayout.tsx"
+        ]
+      },
+      {
+        "id": "REQ-43",
+        "summary": "Update any remaining authentication/onboarding user-facing text that still references \"ParcelGo\" to \"Parcel Wala\" to keep branding consistent.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/AccessDeniedPage.tsx",
+          "frontend/src/components/ProfileSetupModal.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/AccessDeniedPage.tsx",
+          "frontend/src/components/ProfileSetupModal.tsx"
+        ]
+      },
+      {
+        "id": "REQ-44",
+        "summary": "Extend the backend UserProfile type to support additional Sign Up details (at minimum phone number and government-ID address), and update save/get flows accordingly.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/home-hero-photo-pacel-wala.dim_1200x600.jpg",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/MobileTabs.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/components/SignUpModal.tsx",
+    "frontend/src/components/cards/ParcelCard.tsx",
+    "frontend/src/components/cards/TripCard.tsx",
+    "frontend/src/components/motion/AnimatedTabContent.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useProfilePhoto.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/layouts/MobileAppLayout.tsx",
+    "frontend/src/pages/AccessDeniedPage.tsx",
+    "frontend/src/pages/EarningsPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/ProfilePage.tsx",
+    "frontend/src/pages/SendParcelPage.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

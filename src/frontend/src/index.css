@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1rem;
+        /* Light sky-blue theme */
+        --background: 0.97 0.02 220;
+        --foreground: 0.25 0.04 230;
+        --card: 0.99 0.01 220;
+        --card-foreground: 0.25 0.04 230;
+        --popover: 0.99 0.01 220;
+        --popover-foreground: 0.25 0.04 230;
+        --primary: 0.65 0.12 230;
+        --primary-foreground: 0.99 0.01 220;
+        --secondary: 0.92 0.03 225;
+        --secondary-foreground: 0.30 0.04 230;
+        --muted: 0.94 0.02 225;
+        --muted-foreground: 0.55 0.04 230;
+        --accent: 0.88 0.06 225;
+        --accent-foreground: 0.30 0.04 230;
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0.01 220;
+        --border: 0.88 0.04 225;
+        --input: 0.94 0.02 225;
+        --ring: 0.65 0.12 230;
+        --chart-1: 0.65 0.12 230;
+        --chart-2: 0.60 0.10 210;
+        --chart-3: 0.70 0.14 240;
+        --chart-4: 0.62 0.11 220;
+        --chart-5: 0.68 0.13 235;
+        --sidebar: 0.99 0.01 220;
+        --sidebar-foreground: 0.25 0.04 230;
+        --sidebar-primary: 0.65 0.12 230;
+        --sidebar-primary-foreground: 0.99 0.01 220;
+        --sidebar-accent: 0.92 0.03 225;
+        --sidebar-accent-foreground: 0.30 0.04 230;
+        --sidebar-border: 0.88 0.04 225;
+        --sidebar-ring: 0.65 0.12 230;
+    }
+
+    .dark {
+        --background: 0.20 0.06 230;
+        --foreground: 0.95 0.02 220;
+        --card: 0.25 0.08 230;
+        --card-foreground: 0.95 0.02 220;
+        --popover: 0.25 0.08 230;
+        --popover-foreground: 0.95 0.02 220;
+        --primary: 0.65 0.12 230;
+        --primary-foreground: 0.99 0.01 220;
+        --secondary: 0.32 0.10 230;
+        --secondary-foreground: 0.95 0.02 220;
+        --muted: 0.30 0.08 230;
+        --muted-foreground: 0.70 0.05 220;
+        --accent: 0.40 0.12 230;
+        --accent-foreground: 0.95 0.02 220;
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0.01 220;
+        --border: 0.35 0.10 230;
+        --input: 0.30 0.08 230;
+        --ring: 0.65 0.12 230;
+        --chart-1: 0.65 0.12 230;
+        --chart-2: 0.60 0.10 210;
+        --chart-3: 0.70 0.14 240;
+        --chart-4: 0.62 0.11 220;
+        --chart-5: 0.68 0.13 235;
+        --sidebar: 0.25 0.08 230;
+        --sidebar-foreground: 0.95 0.02 220;
+        --sidebar-primary: 0.65 0.12 230;
+        --sidebar-primary-foreground: 0.99 0.01 220;
+        --sidebar-accent: 0.32 0.10 230;
+        --sidebar-accent-foreground: 0.95 0.02 220;
+        --sidebar-border: 0.35 0.10 230;
+        --sidebar-ring: 0.65 0.12 230;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+    /* Reduced motion utilities */
+    @media (prefers-reduced-motion: reduce) {
+        .motion-safe\:animate-in,
+        .motion-safe\:animate-pulse,
+        .motion-safe\:animate-spin,
+        .motion-safe\:fade-in,
+        .motion-safe\:slide-in-from-bottom,
+        .motion-safe\:slide-in-from-bottom-2,
+        .motion-safe\:slide-in-from-bottom-4 {
+            animation: none !important;
+        }
+        
+        .motion-safe\:hover\:scale-105:hover,
+        .motion-safe\:hover\:scale-110:hover,
+        .motion-safe\:active\:scale-95:active,
+        .motion-safe\:hover\:-translate-y-0.5:hover {
+            transform: none !important;
+        }
+        
+        .motion-safe\:hover\:shadow-lg:hover,
+        .motion-safe\:hover\:shadow-md:hover {
+            box-shadow: none !important;
+        }
+    }
+
+    /* Decorative gradient utilities */
+    .sky-gradient-header {
+        background: linear-gradient(135deg, oklch(0.92 0.04 225) 0%, oklch(0.88 0.06 230) 100%);
+    }
+
+    .sky-gradient-subtle {
+        background: linear-gradient(180deg, oklch(0.97 0.02 220) 0%, oklch(0.94 0.03 225) 100%);
+    }
+
+    .sky-pattern-overlay {
+        background-image: radial-gradient(circle at 20% 50%, oklch(0.90 0.05 225 / 0.3) 0%, transparent 50%),
+                          radial-gradient(circle at 80% 80%, oklch(0.88 0.06 230 / 0.2) 0%, transparent 50%);
+    }
+}

@@ -1,0 +1,221 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Parcel Wala branding, navigation motion, INR currency, Send Parcel simplification, profile photo preview, and Sign Up UI flow",
+  "requirements": [
+    {
+      "id": "REQ-35",
+      "summary": "Add branded home hero phone image asset with on-screen text \"Pacel Wala\" and use it wherever the hero phone photo is shown.",
+      "acceptanceCriteria": [
+        "A new generated image asset is added under frontend/public/assets/generated with the requested on-screen text \"Pacel Wala\" visible on the phone screen.",
+        "Home page hero image uses the updated branded phone photograph asset.",
+        "No other generated image filenames are changed or removed."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/home-hero-photo-pacel-wala.dim_1200x600.jpg",
+          "operation": "create",
+          "description": "Add the edited hero image asset described in imageRequirements (home-hero-photo.dim_1200x600.jpg > home-hero-photo-pacel-wala.dim_1200x600.jpg) with on-screen text \"Pacel Wala\"."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Update the hero image to render the new generated asset at frontend/public/assets/generated/home-hero-photo-pacel-wala.dim_1200x600.jpg anywhere the current phone hero photograph is used."
+        }
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "summary": "Change tab/screen transitions to a smooth horizontal slide animation and respect prefers-reduced-motion.",
+      "acceptanceCriteria": [
+        "Switching tabs animates content horizontally (slide left/right) instead of the current vertical fade/translate.",
+        "Animation duration and easing feel smooth and do not cause flicker (content does not jump).",
+        "When prefers-reduced-motion is enabled, transitions occur without motion (no sliding)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/motion/AnimatedTabContent.tsx",
+          "operation": "modify",
+          "description": "Replace the current vertical translate/fade transition with a horizontal slide left/right transition; keep reduced-motion behavior (no motion) when prefers-reduced-motion is enabled."
+        },
+        {
+          "path": "frontend/src/layouts/MobileAppLayout.tsx",
+          "operation": "modify",
+          "description": "Compute and pass a stable slide direction for tab changes (left/right) to AnimatedTabContent so animations are deterministic and do not flicker/jump."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add/adjust any needed utility classes for horizontal slide transitions (and ensure they are disabled under prefers-reduced-motion) without introducing new global stylesheet entry points."
+        }
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "summary": "Replace remaining '$' currency displays and dollar-sign icons with ₹ and rupee-appropriate/neutral icons across the UI.",
+      "acceptanceCriteria": [
+        "No user-facing text displays '$' for money amounts; currency is shown as ₹ consistently.",
+        "Where a currency icon is used (e.g., lucide DollarSign), either replace it with a neutral money/rupee-appropriate icon or remove the misleading '$' implication while keeping the UI visually consistent.",
+        "Price-related components (cards, totals, calculators, forms) display ₹ consistently."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/MobileTabs.tsx",
+          "operation": "modify",
+          "description": "Replace any DollarSign icon usage with a rupee-appropriate/neutral lucide icon (e.g., IndianRupee/Banknote) so the tab bar does not imply '$'."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Replace DollarSign icon usage in the Home page CTA card with a rupee-appropriate/neutral icon; ensure any currency text remains ₹."
+        },
+        {
+          "path": "frontend/src/components/cards/ParcelCard.tsx",
+          "operation": "modify",
+          "description": "Replace DollarSign icon usage with a rupee-appropriate/neutral icon while keeping the ₹ amount display."
+        },
+        {
+          "path": "frontend/src/components/cards/TripCard.tsx",
+          "operation": "modify",
+          "description": "Replace DollarSign icon usage with a rupee-appropriate/neutral icon while keeping the ₹ price-per-kg display."
+        },
+        {
+          "path": "frontend/src/pages/EarningsPage.tsx",
+          "operation": "modify",
+          "description": "Replace DollarSign icon usage with a rupee-appropriate/neutral icon; ensure displayed totals remain ₹."
+        }
+      ]
+    },
+    {
+      "id": "REQ-38",
+      "summary": "Remove the travel mode selector from Send Parcel and adjust validation and backend call inputs accordingly.",
+      "acceptanceCriteria": [
+        "Send Parcel form no longer renders the travel mode selector (TravelModeSelect).",
+        "Submit validation does not require travel mode.",
+        "Submitting a parcel still succeeds end-to-end (createParcel mutation completes) using a reasonable default travel mode value when calling the backend API."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/SendParcelPage.tsx",
+          "operation": "modify",
+          "description": "Remove the TravelModeSelect field from the Send Parcel form, update required-field validation to exclude travelMode, and call createParcel with a reasonable default Mode value (e.g., Mode.car) so submission still completes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-39",
+      "summary": "Add a Profile photo upload control that previews a locally selected image as the user's avatar (UI-only).",
+      "acceptanceCriteria": [
+        "Profile page includes a clear action to upload/change a profile photo.",
+        "After selecting an image, the avatar preview updates immediately to show the selected image.",
+        "The solution does not require any external image hosting or third-party integrations."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useProfilePhoto.ts",
+          "operation": "create",
+          "description": "Create a small hook to manage a locally selected profile photo preview (e.g., via object URLs and optional localStorage persistence) without any external hosting."
+        },
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "modify",
+          "description": "Add an upload/change photo UI (file input) and wire it to update AvatarImage preview immediately using the local-only approach (no backend/external hosting)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-40",
+      "summary": "Add a Sign Up option and post-auth profile creation flow collecting name, phone number, and government-ID address, and saving via existing backend capability.",
+      "acceptanceCriteria": [
+        "AccessDenied screen provides a user-facing \"Sign up\" option in addition to login.",
+        "After authentication, users without a profile are guided through a Sign Up/profile creation flow that collects at minimum: Name, Phone number, and Address (Government ID address).",
+        "Submitted Sign Up details are saved in the backend user profile and are returned by getCallerUserProfile on subsequent loads.",
+        "Existing users with a profile are not forced through Sign Up again."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AccessDeniedPage.tsx",
+          "operation": "modify",
+          "description": "Add a visible \"Sign up\" action alongside login; store an onboarding intent (e.g., sessionStorage flag) so the app can route newly authenticated users into the Sign Up flow."
+        },
+        {
+          "path": "frontend/src/components/SignUpModal.tsx",
+          "operation": "create",
+          "description": "Create a Sign Up modal that collects at minimum Name, Phone number, and Government ID address, and submits via the backend signUp capability; ensure success updates the cached current user profile."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add a React Query mutation hook for the backend signUp capability and ensure successful completion invalidates/refetches getCallerUserProfile."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Replace/extend the current profile-setup gating so authenticated users with no profile are guided through the new Sign Up flow (SignUpModal). Ensure existing users with profiles bypass Sign Up, and clear any stored onboarding intent once completed."
+        }
+      ]
+    },
+    {
+      "id": "REQ-41",
+      "summary": "Style the Sign Up Name field with larger text and a transparent background while keeping theme readability.",
+      "acceptanceCriteria": [
+        "Name input in the Sign Up UI uses a larger font size than other inputs.",
+        "Name input background is visually removed (transparent) while maintaining visible borders/focus state and accessible contrast.",
+        "Other fields retain standard input styling for consistency."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/SignUpModal.tsx",
+          "operation": "modify",
+          "description": "Apply Sign Up form styling: make the Name input larger than other fields and transparent (no background fill), while retaining clear borders, focus rings, and accessible contrast consistent with the current theme."
+        }
+      ]
+    },
+    {
+      "id": "REQ-42",
+      "summary": "Ensure the Offer Trip tab appears in the bottom tab navigation and navigates to the existing Offer Trip page.",
+      "acceptanceCriteria": [
+        "Bottom tab bar includes an \"Offer Trip\" tab item.",
+        "Tapping \"Offer Trip\" navigates to the Offer Trip screen (OfferTripPage).",
+        "Tab selection state, back behavior, and animations continue to work with the newly added tab."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/MobileTabs.tsx",
+          "operation": "modify",
+          "description": "Add an \"Offer Trip\" tab item (id: 'offer') to the bottom tab list and choose an appropriate icon; ensure active state styling and click handling match other tabs."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure the tab-switch render logic continues to map the 'offer' tab id to the existing OfferTripPage (and that the default/fallback behavior remains correct)."
+        },
+        {
+          "path": "frontend/src/layouts/MobileAppLayout.tsx",
+          "operation": "modify",
+          "description": "If tab ordering is used to compute horizontal slide direction, include the new 'offer' tab in that ordering so animations and back behavior remain consistent."
+        }
+      ]
+    },
+    {
+      "id": "REQ-43",
+      "summary": "Replace remaining onboarding/auth branding text \"ParcelGo\" with \"Parcel Wala\" across visible screens.",
+      "acceptanceCriteria": [
+        "AccessDeniedPage and ProfileSetupModal (and any other visible onboarding screens) do not mention \"ParcelGo\"; they use \"Parcel Wala\" instead.",
+        "All changed strings remain in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AccessDeniedPage.tsx",
+          "operation": "modify",
+          "description": "Update user-facing onboarding/auth text to reference \"Parcel Wala\" instead of \"ParcelGo\" while keeping English copy."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "modify",
+          "description": "Update any remaining visible \"ParcelGo\" strings to \"Parcel Wala\" to keep branding consistent (even if this modal is no longer the primary onboarding path)."
+        }
+      ]
+    }
+  ]
+}

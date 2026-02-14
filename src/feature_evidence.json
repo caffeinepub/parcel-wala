@@ -1,0 +1,197 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-the-home-hero-phone-photograph-to-include-the-on-screen-branding-text-pacel-wala-and-render-the-updated-asset-wherever-the-current-phone-photograph-is-used",
+      "featureTitle": "Update the home hero phone photograph to include the on-screen branding text \"Pacel Wala\" and render the updated asset wherever the current phone photograph is used.",
+      "files": [
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-35"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-change-in-app-page-transitions-to-use-a-smooth-side-to-side-horizontal-slide-animation-for-tab-screen-changes-while-respecting-the-user-s-prefers-reduced-motion-setting",
+      "featureTitle": "Change in-app page transitions to use a smooth side-to-side (horizontal) slide animation for tab/screen changes, while respecting the user's prefers-reduced-motion setting.",
+      "files": [
+        "frontend/src/components/motion/AnimatedTabContent.tsx",
+        "frontend/src/layouts/MobileAppLayout.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-36"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-replace-any-remaining-currency-displays-with-the-indian-rupee-symbol-across-the-entire-ui-including-icons-where-appropriate",
+      "featureTitle": "Replace any remaining '$' currency displays with the Indian Rupee symbol (₹) across the entire UI, including icons where appropriate.",
+      "files": [
+        "frontend/src/components/MobileTabs.tsx",
+        "frontend/src/components/cards/ParcelCard.tsx",
+        "frontend/src/components/cards/TripCard.tsx",
+        "frontend/src/pages/EarningsPage.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-37"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-remove-the-how-are-you-travelling-travel-mode-selection-field-from-the-send-parcel-tab-flow-and-update-validation-and-payload-creation-accordingly",
+      "featureTitle": "Remove the \"How are you travelling\" (travel mode selection) field from the Send Parcel tab flow, and update validation and payload creation accordingly.",
+      "files": [
+        "frontend/src/pages/SendParcelPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-38"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-profile-photo-upload-option-on-the-profile-tab-that-allows-the-user-to-select-an-image-locally-and-preview-it-as-their-avatar-ui-only-no-external-hosting",
+      "featureTitle": "Add a Profile photo upload option on the Profile tab that allows the user to select an image locally and preview it as their avatar (UI-only; no external hosting).",
+      "files": [
+        "frontend/src/hooks/useProfilePhoto.ts",
+        "frontend/src/pages/ProfilePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-39"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-sign-up-option-for-new-users-that-collects-details-including-name-phone-number-and-address-as-per-government-id-proof-and-any-additional-required-details-and-persists-these-details-to-the-canister-user-profile",
+      "featureTitle": "Add a Sign Up option for new users that collects details including name, phone number, and address as per government ID proof (and any additional required details), and persists these details to the canister user profile.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/SignUpModal.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/AccessDeniedPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-40"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-in-the-sign-up-flow-style-the-name-field-so-that-its-text-appears-larger-than-other-fields-and-the-input-has-no-background-fill-transparent-while-keeping-readability-consistent-with-the-current-theme",
+      "featureTitle": "In the Sign Up flow, style the Name field so that its text appears larger than other fields and the input has no background fill (transparent), while keeping readability consistent with the current theme.",
+      "files": [
+        "frontend/src/components/SignUpModal.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-41"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-offer-trip-tab-is-present-in-the-bottom-tab-navigation-and-navigates-to-the-existing-offer-trip-page",
+      "featureTitle": "Ensure the Offer Trip tab is present in the bottom tab navigation and navigates to the existing Offer Trip page.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/MobileTabs.tsx",
+        "frontend/src/layouts/MobileAppLayout.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-42"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-any-remaining-authentication-onboarding-user-facing-text-that-still-references-parcelgo-to-parcel-wala-to-keep-branding-consistent",
+      "featureTitle": "Update any remaining authentication/onboarding user-facing text that still references \"ParcelGo\" to \"Parcel Wala\" to keep branding consistent.",
+      "files": [
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/pages/AccessDeniedPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-43"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

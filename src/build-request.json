@@ -1,0 +1,211 @@
+{
+  "kind": "build_request",
+  "title": "Branding updates, smooth horizontal navigation animations, INR currency, simplified Send Parcel, Profile photo, and Sign Up flow",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-35",
+      "text": "Update the home hero phone photograph to include the on-screen branding text \"Pacel Wala\" and render the updated asset wherever the current phone photograph is used.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "add text \"Pacel Wala\" in the photo of phone"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A new generated image asset is added under frontend/public/assets/generated with the requested on-screen text \"Pacel Wala\" visible on the phone screen.",
+        "Home page hero image uses the updated branded phone photograph asset.",
+        "No other generated image filenames are changed or removed."
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "text": "Change in-app page transitions to use a smooth side-to-side (horizontal) slide animation for tab/screen changes, while respecting the user's prefers-reduced-motion setting.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "page to page transformation should be smooth side to side animation"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Switching tabs animates content horizontally (slide left/right) instead of the current vertical fade/translate.",
+        "Animation duration and easing feel smooth and do not cause flicker (content does not jump).",
+        "When prefers-reduced-motion is enabled, transitions occur without motion (no sliding)."
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "text": "Replace any remaining '$' currency displays with the Indian Rupee symbol (₹) across the entire UI, including icons where appropriate.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "change $ to Rupees sign."
+        ]
+      },
+      "acceptanceCriteria": [
+        "No user-facing text displays '$' for money amounts; currency is shown as ₹ consistently.",
+        "Where a currency icon is used (e.g., lucide DollarSign), either replace it with a neutral money/rupee-appropriate icon or remove the misleading '$' implication while keeping the UI visually consistent.",
+        "Price-related components (cards, totals, calculators, forms) display ₹ consistently."
+      ]
+    },
+    {
+      "id": "REQ-38",
+      "text": "Remove the \"How are you travelling\" (travel mode selection) field from the Send Parcel tab flow, and update validation and payload creation accordingly.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "remove how are you tavelling option from send parcel tab."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Send Parcel form no longer renders the travel mode selector (TravelModeSelect).",
+        "Submit validation does not require travel mode.",
+        "Submitting a parcel still succeeds end-to-end (createParcel mutation completes) using a reasonable default travel mode value when calling the backend API."
+      ]
+    },
+    {
+      "id": "REQ-39",
+      "text": "Add a Profile photo upload option on the Profile tab that allows the user to select an image locally and preview it as their avatar (UI-only; no external hosting).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Add option to add photo in Profile tab."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Profile page includes a clear action to upload/change a profile photo.",
+        "After selecting an image, the avatar preview updates immediately to show the selected image.",
+        "The solution does not require any external image hosting or third-party integrations."
+      ]
+    },
+    {
+      "id": "REQ-40",
+      "text": "Add a Sign Up option for new users that collects details including name, phone number, and address as per government ID proof (and any additional required details), and persists these details to the canister user profile.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "also add sign up option. in sign up option there should be details like name phone number address as per govt id proof and other details."
+        ]
+      },
+      "acceptanceCriteria": [
+        "AccessDenied screen provides a user-facing \"Sign up\" option in addition to login.",
+        "After authentication, users without a profile are guided through a Sign Up/profile creation flow that collects at minimum: Name, Phone number, and Address (Government ID address).",
+        "Submitted Sign Up details are saved in the backend user profile and are returned by getCallerUserProfile on subsequent loads.",
+        "Existing users with a profile are not forced through Sign Up again."
+      ]
+    },
+    {
+      "id": "REQ-41",
+      "text": "In the Sign Up flow, style the Name field so that its text appears larger than other fields and the input has no background fill (transparent), while keeping readability consistent with the current theme.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "font of Name should be larger and no background."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Name input in the Sign Up UI uses a larger font size than other inputs.",
+        "Name input background is visually removed (transparent) while maintaining visible borders/focus state and accessible contrast.",
+        "Other fields retain standard input styling for consistency."
+      ]
+    },
+    {
+      "id": "REQ-42",
+      "text": "Ensure the Offer Trip tab is present in the bottom tab navigation and navigates to the existing Offer Trip page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "add offer trip in bottom tab."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Bottom tab bar includes an \"Offer Trip\" tab item.",
+        "Tapping \"Offer Trip\" navigates to the Offer Trip screen (OfferTripPage).",
+        "Tab selection state, back behavior, and animations continue to work with the newly added tab."
+      ]
+    },
+    {
+      "id": "REQ-43",
+      "text": "Update any remaining authentication/onboarding user-facing text that still references \"ParcelGo\" to \"Parcel Wala\" to keep branding consistent.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ]
+      },
+      "acceptanceCriteria": [
+        "AccessDeniedPage and ProfileSetupModal (and any other visible onboarding screens) do not mention \"ParcelGo\"; they use \"Parcel Wala\" instead.",
+        "All changed strings remain in English."
+      ]
+    },
+    {
+      "id": "REQ-44",
+      "text": "Extend the backend UserProfile type to support additional Sign Up details (at minimum phone number and government-ID address), and update save/get flows accordingly.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "in sign up option there should be details like name phone number address as per govt id proof and other details."
+        ]
+      },
+      "acceptanceCriteria": [
+        "backend/main.mo UserProfile type includes new fields for Sign Up details (at minimum phone number and address) without breaking existing APIs.",
+        "saveCallerUserProfile stores the additional fields and getCallerUserProfile returns them.",
+        "If a stable-state upgrade is required due to schema changes, a conditional backend/migration.mo is added to preserve existing stored user profiles."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional canisters/services).",
+    "Do not edit files under frontend/src/components/ui (read-only UI primitives must be composed).",
+    "Do not add third-party authentication; Internet Identity remains the only auth mechanism.",
+    "No external image hosting or backend image serving for profile photos."
+  ],
+  "nonGoals": [
+    "Implementing real phone/email OTP delivery via SMS/email providers.",
+    "Adding external databases or third-party storage services for images.",
+    "Changing the overall tab information architecture beyond adding Offer Trip to the bottom tab bar as requested."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": [
+      "Add on-screen text \"Pacel Wala\" on the phone screen (home-hero-photo.dim_1200x600.jpg > home-hero-photo-pacel-wala.dim_1200x600.jpg)"
+    ]
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

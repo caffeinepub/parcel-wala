@@ -1,0 +1,524 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 11,
+  "summary": "Update Parcel Wala UI direction: reduce monocolor look by adding more graphics/photographs, and switch overall styling to a lighter, sky-blue color palette (instead of the previously specified deep-blue/no-white theme).",
+  "architectural_notes": [
+    "Cross-platform approach discussed: React for web/mobile-first UI; consider React Native/Flutter for native apps later.",
+    "Core backend stack suggested: Node.js (Express) or Python (Django/FastAPI) with PostgreSQL + Redis; REST or GraphQL APIs.",
+    "Key domain model includes parcels, trips (with travel mode), tracking events/GPS points, payments/escrow, insurance, verification artifacts, chats/messages, ratings.",
+    "External map integration via deep links/URL schemes to Google Maps and Apple Maps; use device geolocation for 'navigate from my location'.",
+    "Travel-mode-specific forms should be conditionally rendered/validated (e.g., flight fields required; others optional/encouraged).",
+    "Consider adding a lightweight animation system for the UI (e.g., CSS transitions / Framer Motion) to support screen/state change motions and micro-interactions.",
+    "Profile verification should use OTP-like user flows; email OTP may need to remain simulated if outbound email is unavailable.",
+    "UI direction change: move from deep blue/no-white backgrounds to a lighter, sky-blue theme; incorporate graphics/photographs to avoid a monocolor appearance.",
+    "UI assets may require editing/overlays to embed \"Pacel Wala\" text directly into the phone/hero photograph used in the UI."
+  ],
+  "known_issues": [
+    "Real email OTP verification may be blocked/limited if outbound email services are unavailable; may require simulated email OTP until configured."
+  ],
+  "isFixRequest": false,
+  "imageRequirements": "## Edit Images\n- Add on-screen text \"Pacel Wala\" on the phone screen (home-hero-photo.dim_1200x600.jpg > home-hero-photo-pacel-wala.dim_1200x600.jpg)",
+  "existing_features": [
+    {
+      "id": "feature-implement-a-mobile-first-responsive-parcelgo-web-app-ui-with-bottom-tab-navigation-and-the-following-main-sections-home-dashboard-browse-send-parcel-offer-trip-track-my-listings-chat-notifications-earnings-and-profile-use-english-for-all-user-facing-text",
+      "title": "Implement a mobile-first responsive ParcelGo web app UI with bottom-tab navigation and the following main sections: Home (dashboard), Browse, Send Parcel, Offer Trip, Track, My Listings, Chat, Notifications, Earnings, and Profile. Use English for all user-facing text.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-core-domain-models-and-crud-flows-for-parcels-and-trips-with-canister-backed-persistence-senders-can-create-manage-parcel-listings-carriers-can-create-manage-trip-offers-both-can-browse-listings",
+      "title": "Create core domain models and CRUD flows for Parcels and Trips with canister-backed persistence: senders can create/manage parcel listings; carriers can create/manage trip offers; both can browse listings.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enhance-browse-with-route-search-that-includes-separate-from-and-to-inputs-a-swap-control-and-popular-route-quick-select-chips-filtering-must-apply-to-both-parcels-and-trips-results",
+      "title": "Enhance Browse with route search that includes separate 'From' and 'To' inputs, a swap control, and popular route quick-select chips; filtering must apply to both Parcels and Trips results.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-multi-modal-carrier-support-trip-offers-must-support-travel-modes-car-bus-train-flight-and-bike-browse-must-include-a-travel-mode-filter-and-trip-cards-must-display-a-travel-mode-badge",
+      "title": "Add multi-modal carrier support: Trip offers must support travel modes Car, Bus, Train, Flight, and Bike; Browse must include a travel-mode filter and Trip cards must display a travel-mode badge.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-mode-specific-trip-details-with-conditional-form-sections-and-validation-car-vehicle-registration-bus-operator-seat-number-optional-e-ticket-reference-train-train-number-train-name-pnr-seat-berth-flight-flight-number-airline-booking-pnr-confirmation-store-these-details-on-the-trip-record-and-display-them-in-trip-details-views-cards",
+      "title": "Implement mode-specific Trip details with conditional form sections and validation: Car (vehicle registration); Bus (operator, seat number, optional e-ticket reference); Train (train number, train name, PNR, seat/berth); Flight (flight number, airline, booking PNR/confirmation). Store these details on the Trip record and display them in Trip details views/cards.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-verification-flags-for-mode-specific-credentials-e-g-vehicle-verified-ticket-verified-pnr-verified-flight-confirmed-and-display-verification-badges-on-trip-listings-provide-ui-controls-to-mark-a-trip-as-verified-simulated-verification-no-external-apis",
+      "title": "Add verification flags for mode-specific credentials (e.g., Vehicle Verified, Ticket Verified, PNR Verified, Flight Confirmed) and display verification badges on Trip listings; provide UI controls to mark a trip as 'verified' (simulated verification, no external APIs).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-mode-specific-insurance-selection-for-parcels-and-or-trips-with-three-tiers-none-basic-premium-persist-insurance-tier-and-coverage-amount-show-insured-badge-in-listings-add-browse-filter-with-insurance-coverage-amounts-must-vary-by-travel-mode-as-described-in-the-project-summary",
+      "title": "Add mode-specific insurance selection for Parcels and/or Trips with three tiers: None, Basic, Premium. Persist insurance tier and coverage amount; show 'Insured' badge in listings; add Browse filter 'With Insurance'. Coverage amounts must vary by travel mode as described in the project summary.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-track-section-with-live-location-tracking-simulation-and-optional-device-geolocation-show-current-coordinates-progress-eta-delivery-status-transitions-and-a-timeline-of-tracking-events-allow-tracking-by-selecting-an-active-delivery-listing-from-the-ui",
+      "title": "Implement Track section with live location tracking simulation and optional device geolocation: show current coordinates, progress %, ETA, delivery status transitions, and a timeline of tracking events. Allow tracking by selecting an active delivery/listing from the UI.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-external-navigation-integrations-in-track-buttons-to-open-the-current-tracked-location-in-google-maps-and-apple-maps-plus-actions-for-navigate-from-my-location-view-full-route-and-share-live-tracking-link-using-url-schemes-and-web-fallbacks-no-embedded-google-maps-sdk-requirement",
+      "title": "Add external navigation integrations in Track: buttons to open the current tracked location in Google Maps and Apple Maps, plus actions for 'Navigate from My Location', 'View Full Route', and 'Share Live Tracking Link' using URL schemes and web fallbacks (no embedded Google Maps SDK requirement).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-in-app-messaging-chat-between-sender-and-carrier-create-conversation-threads-send-messages-show-unread-counts-and-allow-starting-a-chat-from-a-parcel-trip-delivery-detail-view",
+      "title": "Implement in-app messaging (chat) between sender and carrier: create conversation threads, send messages, show unread counts, and allow starting a chat from a parcel/trip/delivery detail view.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-notifications-center-with-categorized-notifications-match-payment-delivery-system-unread-badge-count-and-the-ability-to-mark-notifications-as-read",
+      "title": "Implement notifications center with categorized notifications (match/payment/delivery/system), unread badge count, and the ability to mark notifications as read.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-ratings-reviews-for-users-carriers-and-senders-allow-submitting-a-rating-after-a-delivery-completes-display-average-rating-and-review-count-on-profile-and-on-listings",
+      "title": "Add ratings/reviews for users (carriers and senders): allow submitting a rating after a delivery completes; display average rating and review count on profile and on listings.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-price-calculator-ui-that-suggests-a-recommended-price-based-on-distance-proxy-city-to-city-weight-urgency-speed-option-and-travel-mode-allow-applying-the-suggested-price-to-the-parcel-trip-form-logic-can-be-heuristic-no-external-maps-api",
+      "title": "Add a price calculator UI that suggests a recommended price based on distance proxy (city-to-city), weight, urgency/speed option, and travel mode; allow applying the suggested price to the parcel/trip form (logic can be heuristic, no external maps API).",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-carrier-earnings-dashboard-based-on-escrow-releases-show-totals-over-time-e-g-month-recent-transactions-and-current-balance-available-to-withdraw-simulated",
+      "title": "Add carrier earnings dashboard based on escrow releases: show totals over time (e.g., month), recent transactions, and current balance available to withdraw (simulated).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-profile-section-with-a-user-verification-status-dashboard-identity-verified-phone-verified-email-verified-government-id-uploaded-all-simulated-toggles-fields-display-verified-user-badge-across-the-app-where-relevant-and-enable-browse-filter-verified-only",
+      "title": "Add a Profile section with a user verification status dashboard: identity verified, phone verified, email verified, government ID uploaded (all simulated toggles/fields). Display 'Verified user' badge across the app where relevant, and enable Browse filter 'Verified only'.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-a-coherent-distinct-visual-theme-colors-typography-spacing-components-suitable-for-a-trust-and-safety-logistics-marketplace-enforce-consistent-styling-across-all-tabs-and-states-do-not-use-a-blue-purple-primary-gradient-theme",
+      "title": "Define and apply a coherent, distinct visual theme (colors, typography, spacing, components) suitable for a trust-and-safety logistics marketplace; enforce consistent styling across all tabs and states. Do not use a blue+purple primary gradient theme.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-static-generated-images-to-support-the-ui-an-app-logo-an-app-icon-and-a-small-set-of-empty-state-illustrations-store-them-under-frontend-public-assets-generated-and-reference-them-in-the-ui-no-backend-image-serving",
+      "title": "Add static generated images to support the UI: an app logo, an app icon, and a small set of empty-state illustrations. Store them under frontend/public/assets/generated and reference them in the UI (no backend image serving).",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-animated-transitions-for-main-tab-screen-changes-so-that-when-the-user-switches-bottom-tabs-the-page-content-smoothly-animates-e-g-fade-slide-instead-of-instantly-swapping",
+      "title": "Add animated transitions for main tab/screen changes so that when the user switches bottom tabs, the page content smoothly animates (e.g., fade/slide) instead of instantly swapping.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-lightweight-motion-and-interaction-feedback-across-common-ui-elements-buttons-cards-filter-panels-and-list-items-using-existing-tailwind-animation-utilities-to-improve-perceived-responsiveness",
+      "title": "Add lightweight motion and interaction feedback across common UI elements (buttons, cards, filter panels, and list items) using existing Tailwind/animation utilities to improve perceived responsiveness.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-loading-and-empty-states-with-more-polished-visuals-and-motion-replace-augment-spinners-with-skeleton-loading-placeholders-where-appropriate-and-add-subtle-animation-to-empty-state-presentations-without-changing-existing-empty-state-image-filenames",
+      "title": "Improve loading and empty states with more polished visuals and motion: replace/augment spinners with skeleton/loading placeholders where appropriate and add subtle animation to empty state presentations (without changing existing empty-state image filenames).",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rename-the-app-from-parcelgo-to-parcel-wala-across-all-user-facing-text-alt-text-and-prominent-branding-areas-e-g-loading-screen-text-header-branding-home-welcome-headline-profile-footer-copyright",
+      "title": "Rename the app from \"ParcelGo\" to \"Parcel Wala\" across all user-facing text, alt text, and prominent branding areas (e.g., loading screen text, header branding, Home welcome headline, Profile footer copyright).",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-full-blue-theme-with-no-white-backgrounds-anywhere-in-the-app-ui-including-cards-popovers-sheets-menus-inputs-and-page-backgrounds-use-a-paytm-like-blue-palette-with-these-exact-base-shades-background-061a3a-surface-card-0a2a5e-primary-action-0d6efd-border-123a7a-text-eaf2ff-muted-text-a9c2e8",
+      "title": "Apply a full blue theme with no white backgrounds anywhere in the app UI, including cards, popovers, sheets/menus, inputs, and page backgrounds. Use a Paytm-like blue palette with these exact base shades: background #061A3A, surface/card #0A2A5E, primary/action #0D6EFD, border #123A7A, text #EAF2FF, muted text #A9C2E8.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-ui-feel-like-an-indian-app-style-by-applying-these-specific-patterns-consistently-1-paytm-like-deep-blue-sticky-header-with-strong-branding-2-high-contrast-rounded-cards-16px-radius-with-clear-section-separators-3-bold-primary-ctas-with-full-width-treatment-on-key-forms-4-compact-list-density-with-clear-icons-and-badges-5-bottom-sheet-style-panels-for-secondary-actions-filters-where-applicable-using-existing-ui-primitives-no-new-platform-integrations",
+      "title": "Make the UI feel like an \"Indian app style\" by applying these specific patterns consistently: (1) Paytm-like deep-blue sticky header with strong branding, (2) high-contrast rounded cards (16px radius) with clear section separators, (3) bold primary CTAs with full-width treatment on key forms, (4) compact list density with clear icons and badges, (5) bottom-sheet style panels for secondary actions/filters where applicable (using existing UI primitives; no new platform integrations).",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-logo-and-app-name-larger-in-the-top-header-area-and-update-header-branding-to-reflect-parcel-wala-keeping-a-mobile-first-layout",
+      "title": "Make the logo and app name larger in the top header area and update header branding to reflect \"Parcel Wala\" (keeping a mobile-first layout).",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-back-button-on-every-page-via-the-app-s-top-header-the-back-button-must-navigate-to-the-previous-in-app-screen-state-where-possible-e-g-previous-tab-or-previous-view-and-be-disabled-hidden-only-when-there-is-no-meaningful-back-destination",
+      "title": "Add a Back button on every page via the app’s top header. The Back button must navigate to the previous in-app screen state where possible (e.g., previous tab or previous view) and be disabled/hidden only when there is no meaningful back destination.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-otp-verification-flows-simulated-inside-the-profile-verification-area-1-mobile-number-verification-flow-with-send-otp-otp-input-verify-resend-with-timer-2-email-verification-flow-with-send-otp-otp-input-verify-resend-with-timer-3-government-id-verification-flow-with-file-upload-front-side-document-upload-a-review-screen-and-a-manual-confirmation-step-to-mark-identity-as-verified-persist-verification-results-by-updating-the-existing-backend-userprofile-flags-phoneverified-emailverified-governmentiduploaded-identityverified",
+      "title": "Add OTP verification flows (simulated) inside the Profile verification area: (1) Mobile number verification flow with Send OTP, OTP input, verify, resend with timer; (2) Email verification flow with Send OTP, OTP input, verify, resend with timer; (3) Government ID verification flow with file upload (front-side document upload), a review screen, and a manual confirmation step to mark identity as verified. Persist verification results by updating the existing backend UserProfile flags (phoneVerified, emailVerified, governmentIdUploaded, identityVerified).",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-move-the-logout-option-to-the-profile-tab-only-remove-logout-access-from-the-global-header-area-so-users-cannot-logout-from-the-header-add-a-clear-logout-action-button-inside-profile-instead",
+      "title": "Move the Logout option to the Profile tab only. Remove logout access from the global header area so users cannot logout from the header; add a clear Logout action/button inside Profile instead.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-smooth-page-to-page-animations-beyond-the-existing-tab-content-animation-by-animating-internal-screen-changes-triggered-by-app-navigation-patterns-e-g-moving-from-home-buttons-into-other-tabs-opening-closing-verification-flows-and-returning-via-back-animations-must-respect-prefers-reduced-motion",
+      "title": "Add smooth page-to-page animations beyond the existing tab content animation by animating internal screen changes triggered by app navigation patterns (e.g., moving from Home buttons into other tabs, opening/closing verification flows, and returning via Back). Animations must respect prefers-reduced-motion.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-price-calculator-ui-and-logic-by-adding-these-exact-additional-options-1-travel-mode-selector-car-bus-train-flight-bike-that-affects-pricing-2-parcel-size-selector-small-medium-large-multiplier-3-fragile-toggle-multiplier-4-door-pickup-toggle-multiplier-5-insurance-tier-selector-none-basic-premium-multiplier-ensure-the-suggested-price-output-updates-based-on-all-selected-options-and-remains-displayed-in-inr",
+      "title": "Update the Price Calculator UI and logic by adding these EXACT additional options: (1) Travel mode selector (Car/Bus/Train/Flight/Bike) that affects pricing, (2) Parcel size selector (Small/Medium/Large) multiplier, (3) Fragile toggle multiplier, (4) Door pickup toggle multiplier, (5) Insurance tier selector (None/Basic/Premium) multiplier. Ensure the suggested price output updates based on all selected options and remains displayed in INR (₹).",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-global-app-theme-to-a-light-sky-blue-palette-so-the-ui-no-longer-feels-monochrome-including-backgrounds-surfaces-cards-borders-and-text-contrast-while-keeping-readability-and-accessibility-across-all-tabs-and-components",
+      "title": "Update the global app theme to a light, sky-blue palette so the UI no longer feels monochrome, including backgrounds, surfaces/cards, borders, and text contrast, while keeping readability and accessibility across all tabs and components.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-restyle-the-sticky-top-header-brandheader-and-bottom-tab-bar-mobiletabs-to-match-the-new-light-sky-blue-theme-and-reduce-the-heavy-dark-appearance-while-preserving-existing-layout-branding-and-back-button-behavior",
+      "title": "Restyle the sticky top header (BrandHeader) and bottom tab bar (MobileTabs) to match the new light sky-blue theme and reduce the heavy/dark appearance, while preserving existing layout, branding, and back button behavior.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-new-static-graphics-photographs-as-local-generated-assets-and-incorporate-them-into-key-screens-to-reduce-the-monochrome-look-without-introducing-external-image-hosting-or-backend-image-serving",
+      "title": "Add new static graphics/photographs (as local generated assets) and incorporate them into key screens to reduce the monochrome look, without introducing external image hosting or backend image serving.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-introduce-lightweight-decorative-ui-treatments-aligned-with-a-light-sky-blue-aesthetic-e-g-soft-gradients-subtle-pattern-overlays-or-section-dividers-to-further-reduce-a-monochrome-feel-while-keeping-the-ui-clean-and-mobile-first",
+      "title": "Introduce lightweight decorative UI treatments aligned with a light sky-blue aesthetic (e.g., soft gradients, subtle pattern overlays, or section dividers) to further reduce a monochrome feel while keeping the UI clean and mobile-first.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-home-hero-phone-photograph-to-include-the-on-screen-branding-text-pacel-wala-and-render-the-updated-asset-wherever-the-current-phone-photograph-is-used",
+      "title": "Update the home hero phone photograph to include the on-screen branding text \"Pacel Wala\" and render the updated asset wherever the current phone photograph is used.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-in-app-page-transitions-to-use-a-smooth-side-to-side-horizontal-slide-animation-for-tab-screen-changes-while-respecting-the-user-s-prefers-reduced-motion-setting",
+      "title": "Change in-app page transitions to use a smooth side-to-side (horizontal) slide animation for tab/screen changes, while respecting the user's prefers-reduced-motion setting.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-any-remaining-currency-displays-with-the-indian-rupee-symbol-across-the-entire-ui-including-icons-where-appropriate",
+      "title": "Replace any remaining '$' currency displays with the Indian Rupee symbol (₹) across the entire UI, including icons where appropriate.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-how-are-you-travelling-travel-mode-selection-field-from-the-send-parcel-tab-flow-and-update-validation-and-payload-creation-accordingly",
+      "title": "Remove the \"How are you travelling\" (travel mode selection) field from the Send Parcel tab flow, and update validation and payload creation accordingly.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-profile-photo-upload-option-on-the-profile-tab-that-allows-the-user-to-select-an-image-locally-and-preview-it-as-their-avatar-ui-only-no-external-hosting",
+      "title": "Add a Profile photo upload option on the Profile tab that allows the user to select an image locally and preview it as their avatar (UI-only; no external hosting).",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-sign-up-option-for-new-users-that-collects-details-including-name-phone-number-and-address-as-per-government-id-proof-and-any-additional-required-details-and-persists-these-details-to-the-canister-user-profile",
+      "title": "Add a Sign Up option for new users that collects details including name, phone number, and address as per government ID proof (and any additional required details), and persists these details to the canister user profile.",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-sign-up-flow-style-the-name-field-so-that-its-text-appears-larger-than-other-fields-and-the-input-has-no-background-fill-transparent-while-keeping-readability-consistent-with-the-current-theme",
+      "title": "In the Sign Up flow, style the Name field so that its text appears larger than other fields and the input has no background fill (transparent), while keeping readability consistent with the current theme.",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-offer-trip-tab-is-present-in-the-bottom-tab-navigation-and-navigates-to-the-existing-offer-trip-page",
+      "title": "Ensure the Offer Trip tab is present in the bottom tab navigation and navigates to the existing Offer Trip page.",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-any-remaining-authentication-onboarding-user-facing-text-that-still-references-parcelgo-to-parcel-wala-to-keep-branding-consistent",
+      "title": "Update any remaining authentication/onboarding user-facing text that still references \"ParcelGo\" to \"Parcel Wala\" to keep branding consistent.",
+      "reqIds": [
+        "REQ-43"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create ParcelGo sample mobile app UI (mobile-first) with core tabs: Browse, Send Parcel, Offer Trip, My Listings, Profile",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add live parcel tracking feature (Track tab) with real-time GPS updates/simulation, status progression, ETA, and timeline",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Integrate external maps launching from Track tab (Google Maps + Apple Maps), including navigate-from-my-location, view full route, and share tracking link",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Enhance Browse tab search with separate From/To fields (route search), plus swap route and quick popular routes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Support multi-modal carrier trips (car/bus/train/flight/bike) with travel mode selection and filtering in Browse",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Add mode-specific trip details & verification fields: car reg, bus operator/seat/e-ticket, train number/name/PNR/seat, flight number/airline/PNR; show verification badges and conditional forms",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Add mode-specific insurance plans (none/basic/premium) with coverage amounts by travel mode; display insured badges and prioritize/filter insured listings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add trust/safety features: user verification status dashboard (identity/phone/email/government ID) and verified user badges across listings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add real-world marketplace features: smart matching, in-app messaging/chat, notifications center, ratings/reviews, price calculator, escrow-style payments, carrier earnings dashboard",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Implement escrow-style payment state machine (simulation) for bookings: support statuses like Initiated, Escrowed, Released, Refunded; ensure transitions are driven by actions (e.g., sender funds escrow, delivery confirmed releases funds). Do not integrate third-party payment providers unless explicitly configured later.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Add UI graphics enhancements and motion/animation transitions during state/screen changes (e.g., navigation transitions, loading/empty states, micro-interactions)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Rename app to \"Parcel Wala\" and increase prominence/size of logo + app name in the UI",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Implement blue-only theme with no white backgrounds anywhere; update UI styling to feel \"Indian app style\"",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Add back navigation option (Back button) on pages across the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Add Profile verification via OTP-like flows (simulated): phone OTP, email OTP (simulated), and government ID upload + manual confirm screen",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Move Logout action to Profile tab only (remove from elsewhere if present)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-30",
+      "summary": "Expand Price Calculator tab with additional options (pending exact option list from user)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-31",
+      "summary": "Refresh UI to feel less monocolor: add graphics/photographs across key screens and update the app theme to a light, sky-blue palette",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-32",
+      "summary": "Update hero/phone photograph asset to include on-screen text \"Pacel Wala\" (branding text embedded in the phone photo)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-33",
+      "summary": "Implement smooth side-to-side page-to-page transition animations for in-app navigation (beyond tab content), respecting prefers-reduced-motion",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-34",
+      "summary": "Change all currency displays from $ to Indian Rupee symbol (₹) across the app UI (including price calculator, listings, totals)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-35",
+      "summary": "Remove the \"How are you travelling\" option/field from the Send Parcel tab flow",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-36",
+      "summary": "Add Profile photo upload option in the Profile tab (local upload/UI only; no external image hosting required)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-37",
+      "summary": "Add Sign Up flow/screen with fields including name, phone number, address (as per government ID proof), and other required details; ensure Name field uses larger font and has no background styling",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-38",
+      "summary": "Ensure Offer Trip is present in the bottom tab navigation (mobile tabs)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-48",
+      "summary": "Extend the backend UserProfile type to support additional Sign Up details (at minimum phone number and government-ID address), and update save/get flows accordingly.",
+      "reqIds": [
+        "REQ-44"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Parcel Wala",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
